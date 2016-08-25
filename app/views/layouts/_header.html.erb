@@ -33,9 +33,7 @@
 
       <% if user_signed_in? %>
       <li >
-       <h4> <span class="label label-primary">
-       User : <%= current_user.email.split("@")[0] %> 
-       </span></h4>
+        <%= link_to "User : " << current_user.email.split("@")[0] , "#" %> 
      </li>
      <li><%= link_to "Add Book", new_book_path %></li>
      <% end %>

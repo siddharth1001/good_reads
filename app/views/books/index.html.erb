@@ -1,24 +1,47 @@
 
+<div class="jumbotron">
 <% if !user_signed_in? %>
 <h2> Hey! Book lover ! <%= link_to "Sign Up", new_user_registration_path %> </h2>
 <% elsif params[:category].blank? %>
 <h2> All Books</h2>
 <% else %>
 <h2> <u> <%= Category.find_by(name: params[:category]).name %>  </u> </h2>
+<span class="navbar-right">
+	<div class="average_rating_in_category label" data-score="<%= @average_rating_in_category %>"> <abc class="btn" style="color:#0000FF"> Average Rating by <%= current_user.email.split('@')[0] %> in <%=Category.find(@category_id).name %></abc>  </div>
+</span>
 <%end %>
 
 <% if @books.count == 0  %>
 <h3>   NO BOOKS HERE</h3>
 <% end %>
 
-<% @books.each do |book_item| %>
-
-<!-- <h3> Book Title : <% link_to book_item.title , book_path(book_item) %>
-</h3> -->
-<a href= "/books/<%= book_item.id %>"> 
-	<%= image_tag book_item.book_img.url(:medium)  %>
-</a>
-<!-- <p>Author :  <% book_item.author %> </p>  -->
+<!-- Search tag here -->
+<%= form_tag books_path, method: "get" do %>
+  <%= label_tag(:q, "Search for :") %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag("Search") %>
 <% end %>
-<br><br>
 
+
+
+<div class="row">
+	<% @books.each do |book_item| %>
+	<div class="col-md-3">
+		<a href= "/books/<%= book_item.id %>"> 
+		<%= image_tag book_item.book_img.url(:medium) , class: "single_book" %>
+		</a>
+	</div>
+	<% end %>
+</div>
+<br><br>
+</div>
+
+<script >
+	$('.average_rating_in_category').raty({
+		readOnly: true,
+		score: function(){
+			return $(this).attr('data-score');
+		},
+		path: '/assets/'
+	});
+</script>

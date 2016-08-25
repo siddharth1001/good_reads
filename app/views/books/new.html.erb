@@ -1,2 +1,15 @@
  <h1>Enter a new book</h1>
  <%= render 'form' %>
+
+ <script >
+ 	$('document').ready(function() {
+  setTimeout(function() {
+    $('.my_flash').slideUp();
+  }, 3000);
+});
+
+ 	$( "#book_book_img" ).change(function() {
+  alert( "Handler for .change() called." );
+});
+
+ </script>
