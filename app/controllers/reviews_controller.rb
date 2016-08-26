@@ -22,6 +22,7 @@ class ReviewsController < ApplicationController
 
 
 	def edit
+		
 	end
 
 	def update

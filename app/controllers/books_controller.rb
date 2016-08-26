@@ -12,7 +12,7 @@ class BooksController < ApplicationController
 			@category_id = Category.find_by(name: params[:category]).id
 			@books = Book.where(category_id: @category_id).order("created_at DESC")
 			
-			average_review_for_category
+			average_review_for_category unless !user_signed_in?
 		end
 
 	end
@@ -50,6 +50,7 @@ class BooksController < ApplicationController
 
 	def edit
 		@categories = Category.all.map{ |c| [c.name, c.id] }
+		# @average_review = @book.reviews.average(:rating)
 	end
 
 	def update
