@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
 	belongs_to :user
 	belongs_to :category
-	has_many :reviews
+	has_many :reviews, dependent: :destroy
 
 	validates :title, :description, :author, :category_id, :book_img, presence: true
 

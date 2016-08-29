@@ -11,13 +11,15 @@ class BooksController < ApplicationController
 		else
 			@category_id = Category.find_by(name: params[:category]).id
 			@books = Book.where(category_id: @category_id).order("created_at DESC")
-			result_tuple = CategoryAverageRatingByUser.find_by(user_id: current_user.id, category_id: @category_id)
-			if result_tuple.nil?
-				@average_rating = 0
-			else
-				@average_rating = result_tuple.average_rating
+			if user_signed_in?
+				result_tuple = CategoryAverageRatingByUser.find_by(user_id: current_user.id, category_id: @category_id)
+				if result_tuple.nil?
+					puts "result_tuple is nil === = == = == = == = = == = = = = "
+					@average_rating = 0
+				else
+					@average_rating = result_tuple.average_rating
+				end
 			end
-
 			# average_review_for_category unless !user_signed_in?
 		end
 
@@ -69,7 +71,7 @@ class BooksController < ApplicationController
 
 	def destroy
 		@book.destroy
-		# flash[:success] = "Book deleted"
+		flash[:success] = "Book deleted"
 		redirect_to root_path
 	end
 
