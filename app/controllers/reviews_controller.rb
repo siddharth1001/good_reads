@@ -34,6 +34,16 @@ class ReviewsController < ApplicationController
 
 	def update
 		if @review.update(review_params)
+
+			puts params[:book_id].to_s << " ,,,  " << params[:id]
+			category_id = Book.find(params[:book_id]).category_id
+
+			# if params[:book_id].nil?
+			# 	puts "params[:book_id].nil? ------- "
+			# elsif params[:id].nil?
+			# 	puts "params[:id] is nil !!98902183 821"
+			# end
+			update_Category_Average_Rating(current_user.id , category_id, @review.rating)
 			redirect_to book_path(@book)
 		else
 			render 'edit'
@@ -67,6 +77,7 @@ class ReviewsController < ApplicationController
 
 	def update_Category_Average_Rating(current_user_id = 1, book_category_id = 1, review_rating = 0)
 		result_tuple = CategoryAverageRatingByUser.find_by(user_id: current_user_id, category_id: book_category_id)
+		puts result_tuple.to_s << "yyyyyyyyyyyyyyyy"
 		number_of_reviews = result_tuple.number_of_reviews
 		new_average = (result_tuple.average_rating * number_of_reviews + review_rating) / (number_of_reviews + 1)
 		result_tuple.update_attributes(user_id: current_user_id, category_id: book_category_id, average_rating: new_average , number_of_reviews: number_of_reviews+1)
