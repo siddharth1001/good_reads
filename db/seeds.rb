@@ -21,19 +21,19 @@ Category.create!(id: "2",
 Category.create!(id: "3",
 	name: "Technology")
 
-Book.create!(title: "Wings of Fire",
-	description: " dummy description !",
-	author: "A P J Abdul kalam",
-	user_id: "1",
-	category_id: "1")
+# Book.create!(title: "Wings of Fire",
+# 	description: " dummy description !",
+# 	author: "A P J Abdul kalam",
+# 	user_id: "1",
+# 	category_id: "1")
 
-Book.create!(title: "I am Malala",
-	description: " dummy description for I am Malala !",
-	author: "Malala Yousafzai",
-	user_id: "1",
-	category_id: "1")
-Book.create!(title: "Computer Fundamentals",
-	description: " description fpr computer fundamentals !",
-	author: "Anita",
-	user_id: "2",
-	category_id: "3")
+# Book.create!(title: "I am Malala",
+# 	description: " dummy description for I am Malala !",
+# 	author: "Malala Yousafzai",
+# 	user_id: "1",
+# 	category_id: "1")
+# Book.create!(title: "Computer Fundamentals",
+# 	description: " description fpr computer fundamentals !",
+# 	author: "Anita",
+# 	user_id: "2",
+# 	category_id: "3")

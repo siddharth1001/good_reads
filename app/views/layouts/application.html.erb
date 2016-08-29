@@ -2,9 +2,7 @@
 <html>
 <head>
 	<title>GoodReads</title>
-	<%= csrf_meta_tags %>
-	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<%= render 'layouts/rails_default'%>
 </head>
 
 <body>
@@ -15,8 +13,8 @@
     <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
     <% end %>
 	</span>
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+	<!-- <p class="notice"><%= notice %></p> -->
+	<!-- <p class="alert"><%= alert %></p> -->
 	
 	<div class="container">
 		<%= yield %>

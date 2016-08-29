@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  category_id: 1
+  average_rating: 1.5
+  number_of_reviews: 1
+
+two:
+  user_id: 1
+  category_id: 1
+  average_rating: 1.5
+  number_of_reviews: 1

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823162052) do
+ActiveRecord::Schema.define(version: 20160829091353) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20160823162052) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "category_average_rating_by_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.float    "average_rating"
+    t.integer  "number_of_reviews"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "reviews", force: :cascade do |t|

@@ -11,8 +11,14 @@ class BooksController < ApplicationController
 		else
 			@category_id = Category.find_by(name: params[:category]).id
 			@books = Book.where(category_id: @category_id).order("created_at DESC")
-			
-			average_review_for_category unless !user_signed_in?
+			result_tuple = CategoryAverageRatingByUser.find_by(user_id: current_user.id, category_id: @category_id)
+			if result_tuple.nil?
+				@average_rating = 0
+			else
+				@average_rating = result_tuple.average_rating
+			end
+
+			# average_review_for_category unless !user_signed_in?
 		end
 
 	end
@@ -28,7 +34,6 @@ class BooksController < ApplicationController
 		if !params[:category_id].blank?
 			@book.category_id = params[:category_id]
 		end
-
 
 		@categories = Category.all.map{ |c| [c.name, c.id] }
 		if @book.save
@@ -79,16 +84,16 @@ class BooksController < ApplicationController
 		@book = Book.find(params[:id])
 	end
 
-	def average_review_for_category
-		count = 0;
-		@average_rating_in_category = 0
-		@books.each do |book|
-			reviews_by_user = book.reviews.where(user_id: current_user.id)
-			reviews_by_user.each do |review|
-				@average_rating_in_category += review.rating
-				count +=1
-			end
-		end
-		@average_rating_in_category /= count.to_f unless count == 0
-	end
+	# def average_review_for_category
+	# 	count = 0;
+	# 	@average_rating_in_category = 0
+	# 	@books.each do |book|
+	# 		reviews_by_user = book.reviews.where(user_id: current_user.id)
+	# 		reviews_by_user.each do |review|
+	# 			@average_rating_in_category += review.rating
+	# 			count +=1
+	# 		end
+	# 	end
+	# 	@average_rating_in_category /= count.to_f unless count == 0
+	# end
 end

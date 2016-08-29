@@ -10,9 +10,16 @@ class ReviewsController < ApplicationController
 	def create
 		@review = Review.new(review_params)
 		@review.book_id = @book.id
-		@review.user_id = current_user.id
+		current_user_id = current_user.id
+		book_category_id = @book.category_id
+		@review.user_id = current_user_id
 
 		if @review.save
+			if CategoryAverageRatingByUser.exists?(user_id: current_user_id , category_id: book_category_id)
+				update_Category_Average_Rating(current_user_id, book_category_id, @review.rating)
+			else
+				initialize_Category_Average_Rating(current_user_id, book_category_id, @review.rating )
+			end
 			redirect_to book_path(@book)
 		else
 			flash.now[:warning] = "  Error list : " << @review.errors.full_messages.to_s
@@ -51,5 +58,19 @@ class ReviewsController < ApplicationController
 	def find_review
 		@review = Review.find(params[:id])
 	end
+
+	private
+
+	def initialize_Category_Average_Rating(current_user_id = 1, book_category_id = 1, review_rating = 0)
+		CategoryAverageRatingByUser.create(user_id: current_user_id, category_id: book_category_id, average_rating: review_rating, number_of_reviews: 1)
+	end
+
+	def update_Category_Average_Rating(current_user_id = 1, book_category_id = 1, review_rating = 0)
+		result_tuple = CategoryAverageRatingByUser.find_by(user_id: current_user_id, category_id: book_category_id)
+		number_of_reviews = result_tuple.number_of_reviews
+		new_average = (result_tuple.average_rating * number_of_reviews + review_rating) / (number_of_reviews + 1)
+		result_tuple.update_attributes(user_id: current_user_id, category_id: book_category_id, average_rating: new_average , number_of_reviews: number_of_reviews+1)
+	end
+
 
 end
