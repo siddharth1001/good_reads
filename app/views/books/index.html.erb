@@ -15,13 +15,12 @@
 <h3>   NO BOOKS HERE</h3>
 <% end %>
 
-<!-- Search tag here -->
+<!-- Search box here -->
 <%= form_tag books_path, method: "get" do %>
   <%= label_tag(:q, "Search for :") %>
   <%= text_field_tag :search, params[:search] %>
   <%= submit_tag("Search") %>
 <% end %>
-
 
 
 <div class="row">
