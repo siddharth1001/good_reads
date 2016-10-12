@@ -1,6 +1,7 @@
 User.create!(
 	id: "1",
              email: "sid@sid.org",
+             name: "Siddharth Rawat",
              password:              "foobar",
              password_confirmation: "foobar"
              )
@@ -8,6 +9,7 @@ User.create!(
 User.create!(
 	id: "2",
              email: "example@abc.org",
+             name: "ExampleNAME",
              password:              "foobar",
              password_confirmation: "foobar"
              )
