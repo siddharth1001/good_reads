@@ -1,15 +1,21 @@
+['registered', 'banned', 'moderator', 'admin'].each do |role|
+  Role.find_or_create_by({name: role})
+end
+
 User.create!(
-	id: "1",
+			 id: "1",
              email: "sid@sid.org",
              name: "Siddharth Rawat",
+             role_id: "4",
              password:              "foobar",
              password_confirmation: "foobar"
              )
 
 User.create!(
-	id: "2",
+			 id: "2",
              email: "example@abc.org",
              name: "ExampleNAME",
+             role_id: "4",
              password:              "foobar",
              password_confirmation: "foobar"
              )
