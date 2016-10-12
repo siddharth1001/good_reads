@@ -7,14 +7,14 @@ class BooksController < ApplicationController
 		if params[:category].blank? && params[:search].blank?
 			@books = Book.all.order("created_at DESC")
 		elsif !params[:search].blank?
+			@books = Book.search(params[:search])
 		else
 			@category_id = Category.find_by(name: params[:category]).id
-			@books = Book.search({:category_id => @category_id})
+			@books = Book.where(category_id: @category_id).order("created_at DESC")
 			if user_signed_in?
-				# result_tuple = current_user.average_review_for_category.find_by_category_id(@category_id)
 				result_tuple = CategoryAverageRatingByUser.find_by(user_id: current_user.id, category_id: @category_id)
 				if result_tuple.nil?
-					# puts "result_tuple is nil === = == = == = == = = == = = = = "
+					puts "result_tuple is nil === = == = == = == = = == = = = = "
 					@average_rating = 0
 				else
 					@average_rating = result_tuple.average_rating
@@ -27,22 +27,19 @@ class BooksController < ApplicationController
 
 	def new
 		@book = current_user.books.build
-		puts "here2"
 		@categories = Category.all.map{ |c| [c.name, c.id] }
 	end
 
 	def create
 		@book = current_user.books.build(book_params)
-		puts @book.title << " +++++ " << @book.category_id.to_s << " ----------"
 		if !params[:category_id].blank?
 			@book.category_id = params[:category_id]
 		end
 
-		 
+		@categories = Category.all.map{ |c| [c.name, c.id] }
 		if @book.save
 			redirect_to root_path
 		else
-			@categories = Category.all.map{ |c| [c.name, c.id] }
 			# flash.now[:warning] = "*Please fill all the necessary details" << image_error
 			flash.now[:warning] = "  Error list : " << @book.errors.full_messages.to_s
 			render 'new'
@@ -63,7 +60,7 @@ class BooksController < ApplicationController
 	end
 
 	def update
-		# @book.category_id = params[:category_id] 
+		@book.category_id = params[:category_id] 
 		if @book.update(book_params)
 			redirect_to book_path(@book)
 		else
