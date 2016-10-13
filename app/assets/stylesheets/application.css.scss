@@ -13,15 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
 @import "bootstrap";
 @import "bootstrap-sprockets";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 $gray-medium-light: #eaeaea;
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
+}
+
+/* Navbar Header*/
+
+.navbar-brand {
+  font-size: 22px;
 }
 
 .single_book {

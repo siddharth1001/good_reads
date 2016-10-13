@@ -3,6 +3,7 @@ class User < ApplicationRecord
 	has_many :reviews, dependent: :destroy
 	belongs_to :role
 
+	validates_uniqueness_of :email
 	before_validation :set_default_role
 
   # Include default devise modules. Others available are:
@@ -10,9 +11,27 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
 
+
+  ROLES =[
+  	[:registered, 1],
+  	[:banned, 2],	
+  	[:moderator, 3],
+  	[:admin, 4]
+  ]
+
+  # USER_ROLES = {:registered=> 1,:banned=> 2,:moderator=> 3,:admin=> 4}
+  Role_id_to_name = Hash[*ROLES.map{ |i| [i[1], i[0]] }.flatten]
+  Role_name_to_id = Hash[*ROLES.map{ |i| [i[0], i[1]] }.flatten]
+
+  def user_role
+  	Role_id_to_name[self.role_id]
+  end
+
   private
   def set_default_role
-  	self.role ||= Role.find_by_name('registered')
+  	# self.role ||= Role.find_by_name('registered')
+  	self.role ||= Role.find(Role_name_to_id[:registered])
   end
+
 
 end

@@ -14,6 +14,7 @@ gem 'simple_form', '~> 3.2', '>= 3.2.1'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'devise', '~> 4.2'
 gem 'paperclip', '~> 5.1'
+gem 'font-awesome-sass', '~> 4.6.2'
 
 group :development, :test do
 	gem 'sqlite3', '1.3.11'

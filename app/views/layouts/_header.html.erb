@@ -33,7 +33,10 @@
 
       <% if user_signed_in? %>
       <li >
-        <%= link_to "User : " << current_user.name , users_path(current_user.id) %> 
+        <%= link_to  users_path(current_user.id) do%>
+        <%= icon('user',  id: 'user-icon', class: 'fa-lg') %>
+        <% end  #"User : " << current_user.name ,%> 
+
       </li>
       <li><%= link_to "Add Book", new_book_path %></li>
       <% end %>
