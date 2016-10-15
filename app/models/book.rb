@@ -12,4 +12,10 @@ class Book < ApplicationRecord
 	def self.search(search_book)
 		where("title LIKE ?", "%#{search_book}%")
 	end
+
+	def self.average_rating_by_user(current_user_id, category_id )
+		result_tuple = CategoryAverageRatingByUser.find_by(user_id: current_user_id, category_id: category_id)
+		return 0 if result_tuple.nil?
+		result_tuple.average_rating
+	end
 end

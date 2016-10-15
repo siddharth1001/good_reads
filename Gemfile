@@ -16,6 +16,10 @@ gem 'devise', '~> 4.2'
 gem 'paperclip', '~> 5.1'
 gem 'font-awesome-sass', '~> 4.6.2'
 
+gem 'will_paginate',           '3.1.0'
+gem 'bootstrap-will_paginate', '0.0.10'
+gem 'faker',          '1.6.6'
+
 group :development, :test do
 	gem 'sqlite3', '1.3.11'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

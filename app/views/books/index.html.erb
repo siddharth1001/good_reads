@@ -28,8 +28,10 @@
 
 
 
+<%= will_paginate %>
 
 <div class="row">
+
 	<% @books.each do |book_item| %>
 	<div class="col-md-3">
 		<a href= "/books/<%= book_item.id %>"> 
@@ -38,6 +40,9 @@
 	</div>
 	<% end %>
 </div>
+
+<%= will_paginate  %>
+
 <br><br>
 </div>
 

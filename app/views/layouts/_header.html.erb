@@ -33,8 +33,8 @@
 
       <% if user_signed_in? %>
       <li >
-        <%= link_to  users_path(current_user.id) do%>
-        <%= icon('user',  id: 'user-icon', class: 'fa-lg') %>
+        <%= link_to users_path(current_user.id), title: "#{current_user.name}", 'data-toggle' => 'tooltip' do%>
+        <%= icon('user', current_user.name , id: 'user-icon', class: 'fa-lg') %>
         <% end  #"User : " << current_user.name ,%> 
 
       </li>
@@ -46,3 +46,10 @@
   </div>
 
 </nav>
+
+<script>
+$(document).ready(function(){
+    // $('[data-toggle="tooltip"]').tooltip(); 
+    $('user-icon').tooltip();
+})
+</script>

@@ -5,24 +5,18 @@ class BooksController < ApplicationController
 
 	def index
 		if params[:category].blank? && params[:search].blank?
-			@books = Book.all.order("created_at DESC")
+			# @books = Book.all.order("created_at DESC")
+			@books = Book.all.order("created_at DESC").paginate(page: params[:page], :per_page => 12)
 		elsif !params[:search].blank?
 			@books = Book.search(params[:search])
 		else
 			@category_id = Category.find_by(name: params[:category]).id
-			@books = Book.where(category_id: @category_id).order("created_at DESC")
+			@books = Book.where(category_id: @category_id).order("created_at DESC").paginate(page: params[:page], :per_page => 10)
 			if user_signed_in?
-				result_tuple = CategoryAverageRatingByUser.find_by(user_id: current_user.id, category_id: @category_id)
-				if result_tuple.nil?
-					puts "result_tuple is nil === = == = == = == = = == = = = = "
-					@average_rating = 0
-				else
-					@average_rating = result_tuple.average_rating
-				end
+				@average_rating = Book.average_rating_by_user(current_user.id, @category_id)
 			end
 			# average_review_for_category unless !user_signed_in?
 		end
-
 	end
 
 	def new

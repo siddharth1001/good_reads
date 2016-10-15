@@ -1,50 +1,24 @@
-<!-- <div class="container jumbotron row">
-	<div class="col-sm-8">
-		<h3><%= current_user.email %></h3>
-
-
-		<p style="text-align: left;">Books added : <%= @books_user_added.count %> </p>
+<div class="container-fluid">
+	<div class="media-left">
+		<%= image_tag('my_logo.png', :alt => "User Image", height: '132', width: '132')%>
+		<!-- <p> below</p>
+		<p> add below</p> -->
+		<%= icon('thumbs-up', 'It Worked!!!', id: 'my-icon', class: 'fa-5x') %>
 	</div>
-	<div class="col-sm-4">
-		<span class="navbar navbar-right" >
-			<div align="right">
-				<%= link_to "Delete Account", destroy_user_path(current_user), method: :delete, data: { confirm: "You sure?" } %>
-				<%= link_to "Edit Account", edit_user_registration_path %>
-			</div> <br>
-			<p > Last login Date : <%= current_user.last_sign_in_at.to_date %></p>
-			<p  > Last login Time : <%= current_user.last_sign_in_at.strftime("%I:%M%p")
-				%></p>
-			</span>
-		</div>
-		<div id="admin_panel">
-		<%if current_user.user_role == :admin %>
-		<%= render 'admin_panel' %>
-		<% end %>
-		</div>
-	</div> -->
-	<div class="container-fluid">
-		<div class="media-left">
-			<%= image_tag('my_logo.png', :alt => "User Image", height: '132', width: '132')%>
-			<p> below</p>
-			<p> add below</p>
-			<%= icon('thumbs-up', 'It Worked!!!', id: 'my-icon', class: 'fa-5x') %>
-		</div>
-		<div class="media-body">
-			<div class="jumbotron">
-				<div class="row">
-					<div class="col-sm-8">
-					<div>
-					<%= icon('book', 'Books Added') %> : <%= @books_user_added.count %> </div>
-					<span>Last login Date : <%= current_user.last_sign_in_at.to_date %> </span>
-					<br>
-					<span> Last login Time : <%= current_user.last_sign_in_at.strftime("%I:%M %p")
-					%></span>
+	<div class="media-body">
+		<div class="jumbotron">
+			<div class="row">
+				<div class="col-sm-8">
+					  <div><%= icon('book', 'Books Added') %> : <%= @books_user_added.count %> </div>
+						<span>Last login Date : <%= current_user.last_sign_in_at.to_date %> </span>
+						<br>
+						<span> Last login Time : <%= current_user.last_sign_in_at.strftime("%I:%M %p")
+							%></span>
 
-					</div>
+				</div>
 					<div class="col-sm-4">
 
 						<%= link_to edit_user_registration_path, id: "edit_account" do%>
-						<!-- <i class="icon-puzzle-piece icon-2x"></i> -->
 						<%= icon('edit', 'Edit Details', id: 'edit-icon', class: 'fa-2x') %>
 						<% end %>
 						<br>
@@ -53,14 +27,19 @@
 						<% end %>
 
 					</div>
-				</div>
-				<!-- ADMIN PANEL -->
-		<div id="admin_panel">
-		<%if current_user.user_role == :admin %>
-		<%= render 'admin_panel' %>
-		<% end %>
-		</div>
+					</div>
+					<hr>
+					<div id="user-panel" >
 
-			</div>
+						<%if current_user.user_role == :admin %>
+						<%= render 'admin_panel' %>
+						<% elsif current_user.user_role == :moderator%>
+						<%= render 'moderator_panel' %>
+						<% else%>
+						<%= render 'registered_user_panel' %>
+						<% end %>
+					</div>
+
 		</div>
 	</div>
+</div>
