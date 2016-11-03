@@ -1,0 +1,41 @@
+<div class="col-sm-12">
+
+	<div class="col-xs-12 col-sm-8">
+		<h2><%=current_user.name %></h2>
+		<p><strong>Email: </strong> <%= current_user.email%> </p>
+		<p><strong>Books Added: </strong> <%= @books_user_added.count %> </p>
+		<p><strong>Last login Date: </strong><%= current_user.last_sign_in_at.to_date %> </p>
+		<p><strong>Last login Time: </strong> <%= current_user.last_sign_in_at.strftime("%I:%M %p") %></p>
+		<p><strong>Interested in : </strong>
+			<span class="tags">Technology</span> 
+			<span class="tags">Fiction</span>
+			<span class="tags">Self-Help</span>
+			<span class="tags">class-tags</span>
+		</p>
+	</div>             
+	<div class="col-xs-12 col-sm-4 text-center">
+		<figure>
+			<img src="/assets/my_logo.png" alt="profile image here" class="img-circle img-responsive">
+			<figcaption class="ratings">
+				<p>Ratings
+					<a href="#">
+						<span class="fa fa-star"></span>
+					</a>
+					<a href="#">
+						<span class="fa fa-star"></span>
+					</a>
+					<a href="#">
+						<span class="fa fa-star"></span>
+					</a>
+					<a href="#">
+						<span class="fa fa-star"></span>
+					</a>
+					<a href="#">
+						<span class="fa fa-star-o"></span>
+					</a> 
+				</p>
+			</figcaption>
+		</figure>
+	</div>
+</div>  
+

@@ -16,7 +16,7 @@ gem 'devise', '~> 4.2'
 gem 'paperclip', '~> 5.1'
 gem 'font-awesome-sass', '~> 4.6.2'
 
-gem 'will_paginate',           '3.1.0'
+gem 'will_paginate', '3.1.0'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'faker',          '1.6.6'
 
@@ -34,6 +34,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-byebug'
+  gem 'annotate', '~> 2.7', '>= 2.7.1'
+  gem 'better_errors', '~> 2.1', '>= 2.1.1'
+  gem 'binding_of_caller', '~> 0.7.2'
 end
 
 group :production do

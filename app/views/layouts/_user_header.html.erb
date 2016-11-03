@@ -1,0 +1,49 @@
+<!-- <li >
+  <%if current_user.user_role == :admin %>
+  <%= link_to admin_path(current_user.id), title: "#{current_user.name}", 'data-toggle' => 'tooltip' do%>
+  <%= icon('user', current_user.name , id: 'user-icon', class: 'fa-lg') %>
+  <% end %> 
+  <% elsif current_user.user_role == :moderator%>
+  <%= link_to moderator_user_path(current_user.id), title: "#{current_user.name}", 'data-toggle' => 'tooltip' do%>
+  <%= icon('user', current_user.name , id: 'user-icon', class: 'fa-lg') %>
+  <% end %> 
+  <% else%>
+  <%= link_to users_path, title: "#{current_user.name}", 'data-toggle' => 'tooltip' do%>
+  <%= icon('user', "current_user.name ", id: 'user-icon', class: 'fa-lg') %>
+  <% end %>   
+  <% end %>
+</li> -->
+
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+<%= icon('home', class: 'fa-lg') %>
+  <span class="caret"></span></a>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+<li>
+   <%if current_user.user_role == :admin %>
+     <%= link_to admin_path(current_user.id) do%>
+     <%= icon('user-secret', "Admin Profile", id: 'user-role-icon', class: 'fa-lg') %>
+     <% end %> 
+    <% else%>
+     <%= link_to user_path(current_user.id), :class => "user-list-item"  do%>
+     <%= icon('user', "Your Profle", id: 'user-role-icon', class: 'fa-lg') %>
+     <% end %>   
+   <% end %>
+   </li>
+   <li role="separator" class="divider"></li>
+   <li>
+   <%= link_to users_path, :class => "user-list-item"  do%>
+   <%= icon('users', "All Users", id: 'users-icon', class: 'fa-lg') %>
+   <% end %>   
+   </li>
+ </ul>
+</li>
+
+
+<script>
+  // $(document).ready(function(){
+  //   // $('[data-toggle="tooltip"]').tooltip(); 
+  //   $('#user-icon').tooltip();
+  // })
+</script>
+

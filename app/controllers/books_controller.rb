@@ -69,6 +69,18 @@ class BooksController < ApplicationController
 		redirect_to root_path
 	end
 
+	def get_all_books
+		@books = Book.all.order("created_at DESC");
+	end
+
+  def vba
+    # render :json => {:abc => "json hai"}
+    respond_to do |format|
+    # @java_url = "/home/ajax_download?file=#{file_name}"
+      format.js  #{render :partial => "abc"}
+    end
+
+  end
 
 	private
 

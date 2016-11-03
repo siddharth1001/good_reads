@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id          :integer          not null, primary key
+#  rating      :integer
+#  comment     :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :integer
+#  book_id     :integer
+#  category_id :integer
+#
+
 class Review < ApplicationRecord
 	belongs_to :user
 	belongs_to :book
@@ -9,7 +23,7 @@ class Review < ApplicationRecord
 
 	after_create_commit :set_category_average_on_review_creation
 	after_update_commit :update_category_average_on_review_updation
-	before_destroy :get_original_review_rating_berfore_destroy
+	before_destroy :get_original_review_rating_before_destroy
 	after_destroy_commit :update_category_average_on_review_deletion
 
 	def set_category_average_on_review_creation
@@ -34,7 +48,7 @@ class Review < ApplicationRecord
 		CategoryAverageRatingByUser.update_category_average_rating_after_deletion(user_id , category_id, - @original_rating)
 	end
 
-	def get_original_review_rating_berfore_destroy
+	def get_original_review_rating_before_destroy
 		@original_rating = rating
 		puts "original_rating = #{@original_rating}======== rating = #{rating} =--=-=-=-=-= user_id = #{user_id} =-=-=-=-=-=--=BEFORE destroy-=-==--0=0-=0-=0-=0-=AAAA"
 	end
