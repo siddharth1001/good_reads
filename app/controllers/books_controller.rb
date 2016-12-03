@@ -6,9 +6,9 @@ class BooksController < ApplicationController
 	def index
 		if params[:category].blank? && params[:search].blank?
 			# @books = Book.all.order("created_at DESC")
-			@books = Book.all.order("created_at DESC").paginate(page: params[:page], :per_page => 12)
+			@books = Book.all.desc_order.paginate(page: params[:page], :per_page => 12)
 		elsif !params[:search].blank?
-			@books = Book.search(params[:search])
+			@books = Book.search(params[:search]).paginate(page: params[:page], :per_page => 12)
 		else
 			@category_id = Category.find_by(name: params[:category]).id
 			@books = Book.where(category_id: @category_id).order("created_at DESC").paginate(page: params[:page], :per_page => 10)
@@ -69,9 +69,9 @@ class BooksController < ApplicationController
 		redirect_to root_path
 	end
 
-	def get_all_books
-		@books = Book.all.order("created_at DESC");
-	end
+	# def get_all_books
+	# 	@books = Book.all.order("created_at DESC");
+	# end
 
   def vba
     # render :json => {:abc => "json hai"}
@@ -92,6 +92,7 @@ class BooksController < ApplicationController
 		@book = Book.find(params[:id])
 	end
 
+	
 	# def average_review_for_category
 	# 	count = 0;
 	# 	@average_rating_in_category = 0
