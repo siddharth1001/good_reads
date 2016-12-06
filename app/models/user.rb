@@ -44,10 +44,6 @@ class User < ApplicationRecord
   	Role_id_to_name[self.role_id]
   end
 
-  def send_notifcations
-    UserMailer.welcome_email(self).deliver_now
-  end
-
   private
   def set_default_role
   	# self.role ||= Role.find_by_name('registered')
