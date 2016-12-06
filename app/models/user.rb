@@ -29,7 +29,7 @@ class User < ApplicationRecord
 	belongs_to :role
 
 	validates_uniqueness_of :email
-	before_validation :set_default_role
+	validates :name, presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
