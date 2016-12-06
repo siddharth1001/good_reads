@@ -40,7 +40,6 @@
 	</div>
 	<% end %>
 </div>
-
 <%= will_paginate  %>
 
 <br><br>
@@ -54,4 +53,10 @@
 		},
 		path: '/assets/'
 	});
+
+	$(document).ready(function(){
+	  setTimeout(function(){
+	  	$('.alert-notice').slideUp()
+	  }, 3000);
+	 });
 </script>

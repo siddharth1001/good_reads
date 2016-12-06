@@ -20,6 +20,10 @@
 #
 
 class User < ApplicationRecord
+  require_dependency 'user/constants'
+  require_dependency 'user/callbacks'
+
+
 	has_many :books, dependent: :destroy
 	has_many :reviews, dependent: :destroy
 	belongs_to :role
@@ -32,8 +36,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
 
-  require_dependency 'user/constants'
-
   # USER_ROLES = {:registered=> 1,:banned=> 2,:moderator=> 3,:admin=> 4}
   Role_id_to_name = Hash[*ROLES.map{ |i| [i[1], i[0]] }.flatten]
   Role_name_to_id = Hash[*ROLES.map{ |i| [i[0], i[1]] }.flatten]
@@ -42,11 +44,16 @@ class User < ApplicationRecord
   	Role_id_to_name[self.role_id]
   end
 
+  def send_notifcations
+    UserMailer.welcome_email(self).deliver_now
+  end
+
   private
   def set_default_role
   	# self.role ||= Role.find_by_name('registered')
   	self.role ||= Role.find(Role_name_to_id[:registered])
   end
+
 
 
 end
