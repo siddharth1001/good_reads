@@ -8,7 +8,8 @@ class User < ApplicationRecord
   	logger.debug "in send_notifcations !!"
 
   	begin
-	    UserMailer.welcome_email(self).deliver_now
+	    # UserMailer.welcome_email(self).deliver_now
+      #will use sidekiq for this
   	rescue Exception => e
   		p e
   	end

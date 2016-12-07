@@ -15,7 +15,11 @@
 	</div>             
 	<div class="col-xs-12 col-sm-4 text-center">
 		<figure>
+		<%if current_user.avatar?%> 
+			<img src="<%= current_user.avatar.url(:medium)%>" alt="profile image here" class="img-circle img-responsive">
+		<% else %>
 			<img src="/assets/my_logo.png" alt="profile image here" class="img-circle img-responsive">
+		<% end %>
 			<figcaption class="ratings">
 				<p>Ratings
 					<a href="#">

@@ -17,10 +17,20 @@
 #  updated_at             :datetime         not null
 #  name                   :string
 #  role_id                :integer
+#  avatar_file_name       :string
+#  avatar_content_type    :string
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_role_id               (role_id)
 #
 
 class User < ApplicationRecord
-  require_dependency 'user/constants'
+  require_dependency 'user/constants_and_validations'
   require_dependency 'user/callbacks'
 
 
@@ -28,13 +38,12 @@ class User < ApplicationRecord
 	has_many :reviews, dependent: :destroy
 	belongs_to :role
 
-	validates_uniqueness_of :email
-	validates :name, presence: true
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
+
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
 
   # USER_ROLES = {:registered=> 1,:banned=> 2,:moderator=> 3,:admin=> 4}
   Role_id_to_name = Hash[*ROLES.map{ |i| [i[1], i[0]] }.flatten]
