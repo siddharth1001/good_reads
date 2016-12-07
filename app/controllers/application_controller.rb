@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
 
 	before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
+	rescue_from ActionController::RoutingError, with: :render_404
+	rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
 	protected
 
 	def configure_devise_permitted_parameters
@@ -14,4 +17,13 @@ class ApplicationController < ActionController::Base
 	    	devise_parameter_sanitizer.permit(:account_update, keys: registration_params)
 	    end
 	end
+
+	def render_404
+    	render :file => "#{Rails.root}/public/404.html", :status => :not_found, :layout => false
+  	end
+
+  	def record_not_found(exception)
+  		p exception
+  		#logging
+  	end
 end
