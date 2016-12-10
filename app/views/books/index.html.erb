@@ -19,7 +19,7 @@
 <%= form_tag books_path, method: "get" do %>
   <%= label_tag(:q, "Search for :") %>
   <%= text_field_tag :search, params[:search] , :class => "search_input"%>
-  <%= submit_tag("Search") %>
+  <%= submit_tag("Search", class: "actual_submit search")%>
   <!-- <button type="button" class="btn btn-info">
       <span class="glyphicon glyphicon-search"></span> Search
     </button> -->

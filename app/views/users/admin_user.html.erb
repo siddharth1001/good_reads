@@ -7,7 +7,7 @@
 					<h2><strong> 20.7K </strong></h2>                    
 					<p><small>Followers</small></p>
 					<% if current_user.id != params[:id].to_i%>
-					<button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button>
+					<button class="btn  btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button>
 					<% else %>
 					<%= button_to "Edit Profile", edit_user_registration_path, class: "btn btn-success btn-block", method: :get%>		
 					<%end %>

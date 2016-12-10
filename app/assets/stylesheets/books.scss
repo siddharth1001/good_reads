@@ -26,3 +26,25 @@
 .content-single-book{
 	padding: 20px;
 }
+
+input#search {
+    border: 2px solid #456879;
+    border-radius: 8px;
+    height: 25px;
+    width: 200px;
+}
+
+input[type="submit"].actual_submit {
+    border: 2px solid #456879;
+    border-radius: 10px;
+    outline: none;
+    background-color: #f5f5f5;
+}
+
+.search{
+    width: 80px;
+}
+
+select#category_id {
+    margin-bottom: 10px;
+}

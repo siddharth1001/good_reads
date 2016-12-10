@@ -8,12 +8,16 @@ ROLES =[
   ]
 
 
-#validations
+#user fields validations
 	validates_uniqueness_of :email
 	validates :name, presence: true
 
-	validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
+#user avatar validations
+	# validates_attachment :avatar,
+   # content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  # validates_attachment_file_name :avatar, matches: [/png\z/, /jpe?g\z/]
   validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 1.megabytes
-  validates :avatar, attachment_presence: true
+  # validates :avatar, attachment_presence: true
 
 end

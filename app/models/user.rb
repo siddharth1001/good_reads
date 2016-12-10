@@ -38,6 +38,9 @@ class User < ApplicationRecord
 	has_many :reviews, dependent: :destroy
 	belongs_to :role
 
+  before_validation :set_default_role
+  after_create :send_notifcations
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -58,7 +61,5 @@ class User < ApplicationRecord
   	# self.role ||= Role.find_by_name('registered')
   	self.role ||= Role.find(Role_name_to_id[:registered])
   end
-
-
-
+  
 end

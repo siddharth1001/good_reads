@@ -3,15 +3,14 @@ class User < ApplicationRecord
   after_create :send_notifcations
 
 
-
   def send_notifcations
   	logger.debug "in send_notifcations !!"
 
   	begin
-	    # UserMailer.welcome_email(self).deliver_now
-      #will use sidekiq for this
+      EmailWorker.perform_async(self.id)
   	rescue Exception => e
   		p e
+      puts "===========$$$$$$$$==========="
   	end
   end
 
