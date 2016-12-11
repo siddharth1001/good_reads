@@ -14,10 +14,10 @@ ROLES =[
 
 
 #user avatar validations
-	# validates_attachment :avatar,
-   # content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  has_attached_file :avatar, styles: { medium: "200x200>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+	validates_attachment :avatar, content_type: { content_type: /\Aimage\/.*\Z/ }
   # validates_attachment_file_name :avatar, matches: [/png\z/, /jpe?g\z/]
-  validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 1.megabytes
+  # validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 1.megabytes
   # validates :avatar, attachment_presence: true
 
 end

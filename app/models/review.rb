@@ -27,7 +27,6 @@ class Review < ApplicationRecord
 	after_destroy_commit :update_category_average_on_review_deletion
 
 	def set_category_average_on_review_creation
-
 		if entry_for_CategoryAverageRatingByUser?(user_id , category_id)
 			CategoryAverageRatingByUser.add_new_category_average_rating(user_id, category_id, rating)
 		else
@@ -45,7 +44,7 @@ class Review < ApplicationRecord
 	end
 
 	def update_category_average_on_review_deletion
-		CategoryAverageRatingByUser.update_category_average_rating_after_deletion(user_id , category_id, - @original_rating)
+		CategoryAverageRatingByUser.update_category_average_rating_after_deletion(user_id , category_id, @original_rating)
 	end
 
 	def get_original_review_rating_before_destroy

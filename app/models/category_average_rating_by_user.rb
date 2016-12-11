@@ -35,10 +35,14 @@ class CategoryAverageRatingByUser < ApplicationRecord
 		result_tuple.update_attributes(user_id: current_user_id, category_id: book_category_id, average_rating: new_average , number_of_reviews: number_of_reviews)
 	end
 
-	def self.update_category_average_rating_after_deletion(current_user_id = 1, book_category_id = 1, review_rating_diff = 0)
+	def self.update_category_average_rating_after_deletion(current_user_id = 1, book_category_id = 1, deleted_rating = 0)
 		result_tuple = CategoryAverageRatingByUser.find_by(user_id: current_user_id, category_id: book_category_id)
 		number_of_reviews = result_tuple.number_of_reviews
-		new_average = (result_tuple.average_rating * number_of_reviews + review_rating_diff) / (number_of_reviews-1)
+		if number_of_reviews == 1
+			new_average = 0
+		else
+			new_average = (result_tuple.average_rating * number_of_reviews - deleted_rating) / (number_of_reviews-1)
+		end
 		result_tuple.update_attributes(user_id: current_user_id, category_id: book_category_id, average_rating: new_average , number_of_reviews: number_of_reviews-1)
 	end
 

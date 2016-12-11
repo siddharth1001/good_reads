@@ -8,8 +8,7 @@ class EmailWorker
 
   def perform(user_id)
     # do something
-   binding.pry
     user = User.find_by_id(user_id)
-    UserMailer.welcome_email(user).deliver_now
+    # UserMailer.welcome_email(user).deliver_now
   end
 end

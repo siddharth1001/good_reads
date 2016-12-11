@@ -25,7 +25,6 @@ class BooksController < ApplicationController
 	end
 
 	def create
-		# binding.pry
 		@book = current_user.books.build(book_params)
 		if !params[:category_id].blank?
 			@book.category_id = params[:category_id]
