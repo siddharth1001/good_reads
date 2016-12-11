@@ -1,0 +1,166 @@
+ <!-- <div class="container-fluid">
+<div class="media-left">
+<%= image_tag('my_logo.png', :alt => "User Image", height: '132', width: '132')%>
+<p> below</p>
+<p> add below</p> 
+<%= icon('thumbs-up', 'It Worked!!!', id: 'my-icon', class: 'fa-5x') %>
+</div>
+<div class="media-body">
+<div class="jumbotron">
+<div class="row">
+<div class="col-sm-8">
+<div><%= icon('book', 'Books Added') %> : <%= @books_user_added.count %> </div>
+<span>Last login Date : <%= current_user.last_sign_in_at.to_date %> </span>
+<br>
+<span> Last login Time : <%= current_user.last_sign_in_at.strftime("%I:%M %p")
+%></span>
+
+</div>
+<div class="col-sm-4">
+
+<%= link_to edit_user_registration_path, id: "edit_account" do%>
+<%= icon('edit', 'Edit Details', id: 'edit-icon', class: 'fa-2x') %>
+<% end %>
+<br>
+<%= link_to destroy_user_path(current_user), method: :delete, data: { confirm: "You sure?" } do%>
+<%= icon('user-times', 'Delete Account', id: 'delete-user-icon', class: 'fa-2x') %>
+<% end %>
+
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div> -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 ">
+			<div class="well profile">
+
+					<%= render 'users/user_info_snippet' %>
+
+				<div class="col-xs-12 divider text-center">
+					<div class="col-xs-12 col-sm-4 emphasis">
+						<h2><strong> 20.7K </strong></h2>                    
+						<p><small>Followers</small></p>
+						<% if current_user.id != params[:id].to_i%>
+						<button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button>
+						<% else %>
+							 <%= button_to "Edit Profile", edit_user_registration_path, class: "btn btn-success btn-block", method: :get%>		
+						<%end %>
+					</div>
+					<div class="col-xs-12 col-sm-4 emphasis">
+						<h2><strong>245</strong></h2>                    
+						<p><small>Following</small></p>
+						<button class="btn btn-info btn-block" id="show_books_btn"><span class="fa fa-book"></span>View Books Added</button>
+						<%# button_to "Show all books", edit_user_registration_path, class: "btn btn-success btn-block", method: :get%>	
+					</div>
+					<script type="text/javascript">
+
+		var b = jQuery('#show_books_btn');
+
+		b.click(function(){
+		if(b.text()==="View Books Added"){
+			b.text('Suprize me !');
+			var span = $('<span />').addClass('fa fa-users');
+			b.prepend(span);
+			jQuery('#bottom_partial').empty();
+			jQuery('#bottom_partial').append("<%= escape_javascript render 'view_books_added'%>");//append("yes View  All users");
+			// jQuery('#bottom_partial').load('a.txt');
+			
+		}
+		else{
+			debugger;
+			b.text('View Books Added');
+			var span = $('<span />').addClass('fa fa-book');
+			b.prepend(span);
+			jQuery('#bottom_partial').empty();
+			$.ajax({
+			   url: '/users/vba',
+			   async: false,
+			   error: function(xhr) {
+			      $('#bottom_partial').html(xhr.responseText);
+			   },
+			   success: function(data) {
+			      // jQuery('#bottom_partial').append(data);
+			      console.log(data);
+			   },
+			   type: 'GET'
+			});
+			jQuery('#bottom_partial').append("<%= escape_javascript render 'suprise_books'%>");
+		}
+
+	});		
+
+</script>
+<!-- <script type="text/javascript">
+	var b = jQuery('#show_books_btn');
+
+		b.click(function(){
+			if(b.text()==="View Books Added"){
+				b.text('Suprise me !');
+				var span = jQuery('<span />').addClass('fa fa-users');
+				b.prepend(span);
+				jQuery('#bottom_partial').empty();
+			// 	jQuery.ajax({
+			// 		type: 'GET',
+			// 	      url: '/books/vba',
+			// 	      dataType: "script",
+			// 	      success: function(data){
+			// 	        console.log("data");
+			// 	        // jQuery('#bottom_partial').html(data.abc);
+			// 	      },
+			// 	      error: function(data) {
+   //    					console.log("error");
+   //    					console.log(data.error());
+   // }
+			// 	});
+			// $.getScript( "../vba.js.erb", function( data, textStatus, jqxhr ) {
+			// 	  console.log( data ); // Data returned
+			// 	  console.log( textStatus ); // Success
+			// 	  console.log( jqxhr.status ); // 200
+			// 	  console.log( "Load was performed." );
+			// 	});
+			}
+			else{
+				console.log("in else");
+				 b.text('View Books Added');
+				var span = jQuery('<span />').addClass('fa fa-book');
+				b.prepend(span);
+				jQuery('#bottom_partial').empty();
+				$.ajax({url: "/robots.txt", success: function(result){
+        			$("#bottom_partial").html(result);
+    			}});
+			}
+		});
+</script>   --> 
+					
+					<div class="col-xs-12 col-sm-4 emphasis">
+                    <h2><strong>43</strong></h2>                    
+                    <p><small>Books reviewed</small></p>
+                    <div class="btn-group dropup btn-block">
+                      <!-- <button type="button" class="btn btn-primary" id="options-btn"><span class="fa fa-gear"></span> Options </button> -->
+                      <button class="btn btn-primary dropdown-toggle btn-block" data-toggle="dropdown" >
+                        <span class="fa fa-gear">
+                        Options <span class="caret"></span> 
+                        <!-- <span class="sr-only">Toggle Dropdown</span> -->
+                      </button>
+                      <ul class="dropdown-menu text-left" role="menu" id="user-options">
+                        <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
+                        <li><a href="#"><span class="fa fa-list pull-right"></span> Edit Profile  </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><span class="fa fa-warning pull-right"></span>Report this user for spam</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="btn " role="button"> Unfollow </a></li>
+                      </ul>
+                    </div>
+                </div>
+				</div>
+				<!-- ADD partial here-->
+				<hr>
+
+				<div id="bottom_partial"></div>
+			</div>   
+		</div>
+	</div>
+</div>

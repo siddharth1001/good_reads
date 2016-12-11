@@ -13,15 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
 @import "bootstrap";
 @import "bootstrap-sprockets";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 $gray-medium-light: #eaeaea;
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
+}
+
+/* Navbar Header*/
+
+.navbar-brand {
+  font-size: 22px;
 }
 
 .single_book {
@@ -69,6 +79,42 @@ footer {
   clear: both;
   float: left;
   width: 100%;
-  margin-top: 45px;
+  margin-top: 35px;
   @include box_sizing;
 }
+
+/* flash messages */
+
+.alert {
+    margin-left: 25px;
+    margin-right: 25px;
+    font-variant: small-caps;
+}
+
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }

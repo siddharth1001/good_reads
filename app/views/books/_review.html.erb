@@ -1,17 +1,14 @@
-
-<% if user_signed_in? %>
-<%= link_to "Add Review", new_book_review_path(@book), class: "btn" %>
-<% end %>
-<div class="jumbotron">
-	<% if !@book.reviews.nil? %>
+<div class="jumbotron reviews_container">
+	<% if @book.reviews.count !=0 %>
 	<div class="page-header">
-		<h3>All Reviews :
+		<h3>
+		All Reviews
 		</h3>
 
-		<h4><div class="average-review-rating label" data-score="<%= @average_review %>"> <abc class="btn" style="color:#0000FF"> Average Rating : </abc>  </div></h4>
+		<h4><div class="average-review-rating label" data-score="<%= @average_review %>"> <abc class="btn" id="avg-rating-label" > Average Rating : </abc>  </div></h4>
 
 	</div>
-	<table class="table">
+	<div class="table">
 		<% @book.reviews.each do |review_item| %>
 		<div class="row" >
 			<!-- <p ><%= review_item.rating %></p>  -->
@@ -22,10 +19,15 @@
 			<%= link_to "Edit Review" ,  edit_book_review_path(review_item.book, review_item) , class: "btn" %> 
 			<%= link_to "Delete Review" ,  book_review_path(review_item.book, review_item), class: "btn", method: :delete, data: {confirm: "Are you sure?"} %> 
 			<% end %>
+			<hr class="row-seperator">
 		</div>
-		<hr>
-	</table>
+	</div>
 	<% end %>
+	<% else %>
+<h3> No Reviews</h3>
 	<% end %>
-	
+
+<% if user_signed_in? %>
+<%= link_to "Add Review", new_book_review_path(@book), class: "btn btn-sm" %>
+<% end %>
 </div>

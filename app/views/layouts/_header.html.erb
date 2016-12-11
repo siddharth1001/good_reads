@@ -3,17 +3,16 @@
   <div class="container">
 
     <div class="navbar-header">
-      <%= link_to "Book Review", root_path, class: "navbar-brand" %>
+      <%= link_to "Bookish.com", root_path, class: "navbar-brand" %>
     </div>
 
     <ul class="nav navbar-nav">
 
-
       <% if user_signed_in? %>
-        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-      <% else %>  
-         <li><%= link_to "Sign Up", new_user_registration_path %></li>
-         <li><%= link_to "Log In", new_user_session_path %></li>
+      <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+      <li><%= link_to "Sign Up", new_user_registration_path %></li>
+      <li><%= link_to "Log In", new_user_session_path %></li>
       <% end %>
     </ul>
 
@@ -32,14 +31,19 @@
 
 
       <% if user_signed_in? %>
-      <li >
-        <%= link_to "User : " << current_user.email.split("@")[0] , user_info_path %> 
-     </li>
-     <li><%= link_to "Add Book", new_book_path %></li>
-     <% end %>
+      <%= render 'layouts/user_header' %>
+      <li><%= link_to "Add Book", new_book_path %></li>
+      <% end %>
 
-   </ul>
+    </ul>
 
- </div>
+  </div>
 
 </nav>
+
+<script>
+  $(document).ready(function(){
+    // $('[data-toggle="tooltip"]').tooltip(); 
+    $('#user-icon').tooltip();
+  })
+</script>
