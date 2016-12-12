@@ -1,5 +1,11 @@
-# README
+# Bookish.com
 
-This is a demo GoodReads application.
+A web-app that somewhat resembles with **goodreads.com**
 
-#@author = Siddharth Rawat
+Features : Books, Reviews, Users , Email, Background job(sidekiq), Rating, Categories, Average Rating by user in a particular Category, User-roles, font-awesome icons, Bootstrap, devise, etc.
+
+visit at : https://bookish1001.herokuapp.com
+
+NOTE : *the app is not fully finished*
+
+###@author = Siddharth Rawat
