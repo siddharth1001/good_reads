@@ -1,5 +1,8 @@
 <div class="row">
 	<div class="col-xs-12 divider review-block" id="user_bottom_div">
+	<% if @books_user_added.blank? %>
+	<p class="no_books_added">NO BOOKS ADDED</p>
+<% end %>
 		<%= will_paginate @books_user_added%>
 			<% @books_user_added.each do |book_item| %>
 			<div class="row">
