@@ -1,44 +1,37 @@
-<div class="col-xs-12 divider" id="user_bottom_div">
-<h3 class="text-center">Booooookkkssss !</h3>
-	<div id="list-partial-elements" class="col-md-8 col-md-offset-1">
-	<%= will_paginate @books_user_added %>
-
-	<div class="row">
-	<% @books_user_added.each do |book_item| %>
-		<div class="media book-user-added">
-		  <div class="media-left">
-		    <a href= "/books/<%= book_item.id %>"> 
+<div class="row">
+	<div class="col-xs-12 divider review-block" id="user_bottom_div">
+		<%= will_paginate @books_user_added%>
+			<% @books_user_added.each do |book_item| %>
+			<div class="row">
+				<div class="col-xs-3">
+					<a href= "/books/<%= book_item.id %>"> 
 				<%= image_tag book_item.book_img.url(:small) , class: "single_book_user_added" %>
 		    </a>
-		  </div>
-		  <div class="media-body">
-		  <a href= "/books/<%= book_item.id %>"> 
-		    <h4 class="media-heading"><%= book_item.title%></h4>
-		  </a>
-		    <div class="average-review-rating label" data-score="<%= @average_review %>"><span id="avg-rating-label" > Average Rating : </span>  </div>
-		    <br>
-		    <div class="content-single-book"> <div > Author : <%= book_item.author %> </div> 
-		    	<div > Category : <%= Category.find(book_item.category_id).name %> </div>  
-		    	<div > Total reviews : <%= book_item.reviews.count %> </div> 
-		    </div> 	
-		  </div>
-		</div>
-	<% end %>
-	</div>
-		<%= will_paginate @books_user_added%>
+					<div class="review-block-date"> <%date = book_item.created_at.to_date%>
+					<%= date.strftime("%d %B %Y")%>
+					<br> <i> <%= (Date.current - date).to_i%> days ago </i></div>
+			</div>
+				<div class="col-xs-9">
+					
+					<div class="review-block-title"><h4>
+					<a href="/books/<%=book_item.id%>">
+					<%= book_item.title %></h4>
+					</a>
+					</div>
+					<div class="average-review-rating label" data-score="<%= book_item.reviews.average(:rating) %>"><span id="avg-rating-label" > Average Rating : </span>  </div>
+					<div class="review-block-name"><i>  <%= book_item.author %> </i></div>
+					<div class="review-block-description"><%= book_item.description%></div>
+				</div>
+			</div>
+			<hr>
+			<% end %>
 
+		<%= will_paginate @books_user_added%>
 	</div>
+
 </div>
 
-<style type="text/css">
-	#user_bottom_div{
-		margin-top: 20px;
-	}
-</style>
-<p>askjdsakhdgk </p>
-
 <script>
-
 	$('.average-review-rating').raty({
 		readOnly: true,
 		score: function(){

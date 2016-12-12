@@ -4,9 +4,11 @@
 
 
 .single_book_user_added{
-	height: 170px;
-	width: 120px;
-
+	//height: 170px;
+	//width: 120px;
+    height: 105px;
+    width: 75px;
+    border-radius: 8px;
 }
 
 .book-user-added{
@@ -18,7 +20,7 @@
 }
 
 #avg-rating-label{
-	padding: 15px;
+	padding: 0px;
     font-size: small;
     color:#50708c;
 }
@@ -48,3 +50,7 @@ input[type="submit"].actual_submit {
 select#category_id {
     margin-bottom: 10px;
 }
+
+#user_bottom_div{
+        margin-top: 20px;
+    }

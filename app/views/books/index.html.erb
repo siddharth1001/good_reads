@@ -6,7 +6,7 @@
 <% else %>
 <h2> <u> <%= Category.find_by(name: params[:category]).name %>  </u> </h2>
 <span class="navbar-right">
-	<div class="average_rating_in_category label" data-score="<%= @average_rating %>"> <abc class="btn" style="color:#0000FF"> Average Rating by <%= current_user.name %> in <%=Category.find(@category_id).name %></abc>  </div>
+	<div class="average_rating_in_category" data-score="<%= @average_rating %>"> <abc> Average Rating by <i><%= current_user.name %></i> in <strong><%=Category.find(@category_id).name %></strong></abc>  </div>
 </span>
 <%end %>
 

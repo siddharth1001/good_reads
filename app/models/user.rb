@@ -47,7 +47,7 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :trackable, :validatable
 
   has_attached_file :avatar, styles: { medium: "200x200>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
-validates_attachment :avatar, content_type: { content_type: /\Aimage\/.*\Z/ }
+  validates_attachment :avatar, content_type: { content_type: /\Aimage\/.*\Z/ }
   validates_attachment_file_name :avatar, matches: [/png\z/, /jpe?g\z/]
   
   # USER_ROLES = {:registered=> 1,:banned=> 2,:moderator=> 3,:admin=> 4}
