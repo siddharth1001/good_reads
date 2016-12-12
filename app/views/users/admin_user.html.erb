@@ -1,55 +1,47 @@
-<div class="row">
-	<div id="admin_div" class="col-md-offset-2 col-md-8 ">
-		<div class="well profile">
-			<%= render 'users/user_info_snippet' %>
-			<div class="col-xs-12 divider text-center">
-				<div class="col-xs-12 col-sm-4 emphasis">
-					<h2><strong> 20.7K </strong></h2>                    
-					<p><small>Followers</small></p>
-					<% if current_user.id != params[:id].to_i%>
-					<button class="btn  btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button>
-					<% else %>
-					<%= button_to "Edit Profile", edit_user_registration_path, class: "btn btn-success btn-block", method: :get%>		
-					<%end %>
-				</div>
-				<div class="col-xs-12 col-sm-4 emphasis">
-					<h2><strong>245</strong></h2>                    
-					<p><small>Following</small></p>
-					<button class="btn btn-info btn-block"><span class="fa fa-book"></span> All Books added</button>
-				</div>
-				<div class="col-xs-12 col-sm-4 emphasis">
-					<h2><strong>43</strong></h2>                    
-					<p><small>Books reviewed</small></p>
-					<div class="btn-group dropup btn-block">
-						<button type="button" class="btn btn-primary" id="options-btn"><span class="fa fa-gear"></span> Options </button>
-						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu text-left" role="menu" id="user-options">
-							<li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
-							<li><a href="#"><span class="fa fa-list pull-right"></span> Add or remove from a list  </a></li>
-							<li class="divider"></li>
-							<li><a href="#"><span class="fa fa-warning pull-right"></span>Report this user for spam</a></li>
-							<li class="divider"></li>
-							<li><a href="#" class="btn " role="button"> Unfollow </a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<hr>
-User count = <%= @users.count %>
-<div class="col-md-offset-2">
-<%= will_paginate %>
-<% @users.each do |u|%>
-<div class="each_user">
-	<%= u.name %>	: <span><%= u.email %></span>
-</div>
-<% end %>
-<%= will_paginate %>
-</div>
+<%if user_signed_in? && params[:id].to_i == current_user.id && current_user.user_role == :admin %>
+<div class="container admin_home_container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <i class="fa fa-user-secret" aria-hidden="true"></i> Admin Controls</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-6 col-md-6">
+                <a href="<%=application_url%>" class="btn btn-danger btn-lg" role="button"><i class="fa fa-list-alt" aria-hidden="true"></i> <br/>Apps</a>
+                <a href="#" class="btn btn-warning btn-lg" role="button"><i class="fa fa-bookmark-o" aria-hidden="true"></i><br/>Bookmarks</a>
+                <a href="#" class="btn btn-primary btn-lg" role="button"><i class="fa fa-signal" aria-hidden="true"></i> <br/>Reports</a>
+                <a href="#" class="btn btn-primary btn-lg" role="button"><i class="fa fa-comments" aria-hidden="true"></i> <br/>Comments</a>
+              </div>
+              <div class="col-xs-6 col-md-6">
+                <a href="#" class="btn btn-success btn-lg" role="button"><i class="fa fa-users" aria-hidden="true"></i> <br/>Users</a>
+                <a href="#" class="btn btn-info btn-lg" role="button"><i class="fa fa-file" aria-hidden="true"></i> <br/>Notes</a>
+                <a href="#" class="btn btn-primary btn-lg" role="button"><i class="fa fa-photo" aria-hidden="true"></i> <br/>Photos</a>
+                <a href="#" class="btn btn-primary btn-lg" role="button"><i class="fa fa-tags" aria-hidden="true"></i> <br/>Tags</a>
+              </div>
+            </div>
+            <a href="http://www.jquery2dotnet.com/" class="btn btn-success btn-lg btn-block" role="button"><i class="fa fa-globe" aria-hidden="true"></i> Website</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <% else %>
+  <%flash.now[:warning] = "Not Authorised To View This Page"%>
+  <% end %>
 
+  <style type="text/css">
+
+    .admin_home_container{
+      text-align: center;
+    }
+
+    body { padding-top:20px; 
+    }
+    .panel-body .btn:not(.btn-block) {
+     width:120px;margin-bottom:10px; 
+   }
+  </style>

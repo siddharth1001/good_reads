@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :all_books, only: [:registered_user, :admin_user, :moderator_user]
-  before_action :all_users, only: [:admin_user, :moderator_user, :all_users]
+  before_action :all_books, only: [:registered_user, :admin_user, :moderator_user, :apps]
+  before_action :all_users, only: [:admin_user, :moderator_user, :apps]
 
   def all_users
     if user_signed_in?
@@ -22,8 +22,7 @@ class UsersController < ApplicationController
 
   def admin_user
     if user_signed_in?
-      # @users = User.all
-      @books_user_added = @books.where(user_id: current_user.id)  #USE scope Here
+      #do something
     else
       redirect_to root_url, notice: "Please sign in."
     end
@@ -34,7 +33,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-  	puts "====================== = = == = == "
     @user = User.find(params[:id])
     name = @user.name
     @user.destroy
@@ -44,9 +42,9 @@ class UsersController < ApplicationController
     end
   end
 
-def vba
-  @random_books = Book.all.sample(8);
-  render :json => @random_books
+def apps
+
+  # render application_url
 end
   
 

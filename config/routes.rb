@@ -49,8 +49,8 @@ Rails.application.routes.draw do
   get 'admin_user/:id' => 'users#admin_user', as: :admin
   get 'moderator_user/:id' => 'users#moderator_user', as: :moderator
   get 'users' => 'users#all_users', as: :users
+  get 'apps' => 'users#apps', as: :application
 
-  get 'users/vba' => 'users#vba'
 	devise_for :users
 
 	root 'books#index'
